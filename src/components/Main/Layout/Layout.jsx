@@ -6,5 +6,5 @@ export const Layout = ({children}) => (
 );
 
 Layout.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.element.isRequired,
 };
