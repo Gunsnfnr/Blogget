@@ -8,9 +8,7 @@ import Date from './Date';
 
 export const Post = ({postData}) => {
   const {title, author, ups, date} = postData;
-  console.log('title, author, ups, date: ', title, author, ups, date);
 
-  console.log(style);
   return (
     <li className={style.post}>
       <ImgCopmponent />
