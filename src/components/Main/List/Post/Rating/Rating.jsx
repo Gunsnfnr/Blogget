@@ -8,7 +8,7 @@ export const Rating = ({ups}) => (
     <Text As='p'
       size={16}
       tsize={18}
-      className={[style.ups, style.bold]}>{ups}</Text>
+      className={style.ups}>{ups}</Text>
     <button className={style.down} aria-label="Понизить рейтинг"/>
   </div>
 );
