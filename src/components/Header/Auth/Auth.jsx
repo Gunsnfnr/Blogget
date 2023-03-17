@@ -1,8 +1,10 @@
 import style from './Auth.module.css';
+import {ReactComponent as AuthImg} from './img/login.svg';
 
 export const Auth = () => (
   <button className={style.button}>
-    <svg className={style.svg} width="128" height="128" viewBox="0 0 128 128" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <AuthImg width={30} height={30} />
+    {/* <svg className={style.svg} width="128" height="128" viewBox="0 0 128 128" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path d="M88 48C88 54.3652 85.4714 60.4697 80.9706 64.9706C76.4697
       69.4714 70.3652 72 64 72C57.6348 72 51.5303 69.4714 47.0294 64.9706C42.5286
       60.4697 40 54.3652 40 48C40 41.6348 42.5286 35.5303 47.0294 31.0294C51.5303
@@ -19,7 +21,7 @@ export const Auth = () => (
       80 64 80C89.56 80 102.056 89.8 107.744 98.96C114.328 90.7217 118.451 80.7918
       119.64 70.3133C120.829 59.8347 119.035 49.2334 114.464 39.7295C109.894 30.2257
       102.732 22.2055 93.8048 16.5922C84.8771 10.9789 74.5458 8.00056 64 8V8Z"/>
-    </svg>
+    </svg> */}
     {/* <img className={style.photo} src={login} alt="Авторизация" /> */}
   </button>
 );

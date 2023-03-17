@@ -1,8 +1,10 @@
 import style from './Delete.module.css';
+import {ReactComponent as DeleteIcon} from '../img/delete.svg';
 
 export const Delete = () => (
   <button className={style.delete}>
-    <svg
+    <DeleteIcon width={25} height={25}/>
+    {/* <svg
       width='24'
       height='24'
       viewBox='0 0 24 24'
@@ -22,7 +24,7 @@ export const Delete = () => (
         19.6875H6.86016L6.29297 7.6875H17.707L17.1398 19.6875Z'
         fill='currentColor'
       />
-    </svg>
+    </svg> */}
   </button>
 );
 
