@@ -13,7 +13,7 @@ export const Header = ({token, delToken}) => (
         <Logo/>
         <Heading text="Главная" />
         <Search/>
-        <Auth token={token} />
+        <Auth token={token} delToken={delToken}/>
       </div>
     </Layout>
   </header>

@@ -8,10 +8,8 @@ import {URL_API} from '../../../api/const.js';
 
 export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useState({});
-  // let [isVisible] = useState(false);
   const [isVisible, setVisible] = useState(false);
   const logoutHandler = () => {
-    console.log('logoutHandler');
     delToken();
     setAuth({});
   };
@@ -22,13 +20,14 @@ export const Auth = ({token, delToken}) => {
       headers: {
         Authorization: `bearer ${token}`,
       },
-    }).then(response => response.json())
+    }).then(response => response.json()).then(response => console.log(response))
       .then(({name, icon_img: iconImg}) => {
         const img = iconImg.replace(/\?.*$/, '');
         setAuth({name, img});
+        // .then(console.log(response.status))
       })
       .catch(err => {
-        console.err(err);
+        console.log(err);
         setAuth({});
       });
   }, [token]);
