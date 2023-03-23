@@ -4,7 +4,7 @@ import style from './Auth.module.css';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
-import {useAuth} from '../../../hooks/useAuthhook.js';
+import {useAuth} from '../../../hooks/useAuthHook.js';
 
 export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useState({});
