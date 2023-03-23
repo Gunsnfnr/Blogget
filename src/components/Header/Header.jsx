@@ -6,14 +6,14 @@ import Search from './Search';
 import Auth from './Auth';
 import PropTypes from 'prop-types';
 
-export const Header = ({token, delToken, useAuth}) => (
+export const Header = ({token, delToken}) => (
   <header className={style.header}>
     <Layout>
       <div className={style.gridContainer}>
         <Logo/>
         <Heading text="Главная" />
         <Search/>
-        <Auth token={token} delToken={delToken} useAuth={useAuth}/>
+        <Auth token={token} delToken={delToken}/>
       </div>
     </Layout>
   </header>

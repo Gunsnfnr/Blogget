@@ -1,7 +1,6 @@
 import Header from './components/Header';
 import Main from './components/Main';
 import {useToken, delToken} from './hooks/useToken';
-import {useAuth} from './hooks/useAuth';
 
 
 function App() {
@@ -9,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Header token={token} delToken={delToken} useAuth={useAuth}/>
+      <Header token={token} delToken={delToken}/>
       <Main />
     </>
   );
