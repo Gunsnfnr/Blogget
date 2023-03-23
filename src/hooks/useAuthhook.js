@@ -2,10 +2,12 @@ import {useState, useEffect} from 'react';
 import {URL_API} from '../api/const.js';
 import {delToken} from './useToken.js';
 
-export const useAuth = (state) => {
-  const [token, setAuth] = useState(state);
+
+export const useAuth = (token) => {
+  const [setAuth] = useState({});
+
   // token += 'break token';
-  useEffect((state) => {
+  useEffect(() => {
     if (!token) return;
     fetch(`${URL_API}/api/v1/me`, {
       headers: {

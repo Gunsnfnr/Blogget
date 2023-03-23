@@ -4,7 +4,7 @@ import style from './Auth.module.css';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
-import {useAuth} from '../../../hooks/useAuthHook.js';
+import {useAuth} from '../../../hooks/useAuthHook';
 
 export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useState({});
@@ -15,6 +15,35 @@ export const Auth = ({token, delToken}) => {
   };
 
   useAuth();
+  // // token += 'break token';
+  // useEffect(() => {
+  //   if (!token) return;
+  //   fetch(`${URL_API}/api/v1/me`, {
+  //     headers: {
+  //       Authorization: `bearer ${token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         console.log('response: ', response);
+  //         return response.json();
+  //       }
+  //       if (response.status === 401) {
+  //         console.log('response.status 401');
+  //         delToken();
+  //       }
+  //       console.log('response: ', response);
+  //       throw new Error('Something went wrong');
+  //     })
+  //     .then(({name, icon_img: iconImg}) => {
+  //       const img = iconImg.replace(/\?.*$/, '');
+  //       setAuth({name, img});
+  //     })
+  //     .catch(err => {
+  //       console.log('err: ', err);
+  //       setAuth({});
+  //     });
+  // }, [token]);
 
   return (
     <div className={style.container}>
@@ -47,5 +76,4 @@ export const Auth = ({token, delToken}) => {
 Auth.propTypes = {
   token: PropTypes.string,
   delToken: PropTypes.func,
-  useAuth: PropTypes.func,
 };
