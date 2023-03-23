@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 export const delToken = () => {
   console.log();
   localStorage.clear();
-  location.href = 'http://localhost:3000';
+//   location.href = 'http://localhost:3000';
 };
 
 export const useToken = (state) => {

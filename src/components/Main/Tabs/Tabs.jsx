@@ -21,7 +21,7 @@ const LIST = [
 export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true);
-  const [mainIconText, setMainIconText] = useState(false);
+  const [mainIconText, setMainIconText] = useState('');
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {

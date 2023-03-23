@@ -1,12 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './Auth.module.css';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
-import {URL_API} from '../../../api/const.js';
 
-export const Auth = ({token, delToken}) => {
+export const Auth = ({token, delToken, useAuth}) => {
   const [auth, setAuth] = useState({});
   const [isVisible, setVisible] = useState(false);
   const logoutHandler = () => {
@@ -14,23 +13,7 @@ export const Auth = ({token, delToken}) => {
     setAuth({});
   };
 
-  useEffect(() => {
-    if (!token) return;
-    fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    }).then(response => response.json()).then(response => console.log(response))
-      .then(({name, icon_img: iconImg}) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({name, img});
-        // .then(console.log(response.status))
-      })
-      .catch(err => {
-        console.log(err);
-        setAuth({});
-      });
-  }, [token]);
+  useAuth();
 
   return (
     <div className={style.container}>
@@ -63,4 +46,5 @@ export const Auth = ({token, delToken}) => {
 Auth.propTypes = {
   token: PropTypes.string,
   delToken: PropTypes.func,
+  useAuth: PropTypes.func,
 };
