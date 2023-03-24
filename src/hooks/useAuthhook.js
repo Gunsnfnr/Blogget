@@ -38,5 +38,7 @@ export const useAuth = (token) => {
         setAuth({});
       });
   }, [token]);
+
+  if (auth) return [auth];
 };
 

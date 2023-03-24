@@ -7,15 +7,15 @@ import {Text} from '../../../UI/Text/Text';
 import {useAuth} from '../../../hooks/useAuthHook';
 
 export const Auth = ({token, delToken}) => {
+  const [auth, setAuth] = useAuth('');
+  console.log(auth);
+
   const [isVisible, setVisible] = useState(false);
-  const [auth, setAuth] = useState({});
+  // const [auth, setAuth] = useState({});
   const logoutHandler = () => {
     delToken();
     setAuth({});
   };
-
-  useAuth();
-  console.log(auth);
 
   // // token += 'break token';
   // useEffect(() => {
@@ -67,7 +67,7 @@ export const Auth = ({token, delToken}) => {
           )}
         </>
       ) : (
-      <Text className={style.aurhLink} As='a' href={urlAuth}>
+      <Text className={style.authLink} As='a' href={urlAuth}>
         <LoginIcon width={30} height={30} />
       </Text>
       )}
