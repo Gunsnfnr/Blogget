@@ -7,14 +7,16 @@ import {Text} from '../../../UI/Text/Text';
 import {useAuth} from '../../../hooks/useAuthHook';
 
 export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useState({});
   const [isVisible, setVisible] = useState(false);
+  const [auth, setAuth] = useState({});
   const logoutHandler = () => {
     delToken();
     setAuth({});
   };
 
   useAuth();
+  console.log(auth);
+
   // // token += 'break token';
   // useEffect(() => {
   //   if (!token) return;

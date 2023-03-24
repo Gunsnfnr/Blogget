@@ -4,7 +4,8 @@ import {delToken} from './useToken.js';
 
 
 export const useAuth = (token) => {
-  const [setAuth] = useState({});
+  const [auth, setAuth] = useState({});
+  console.log('auth: ', auth);
 
   // token += 'break token';
   useEffect(() => {
@@ -22,6 +23,8 @@ export const useAuth = (token) => {
         if (response.status === 401) {
           console.log('response.status 401');
           delToken();
+        } else {
+          console.log('response.status: ', response.status);
         }
         console.log('response: ', response);
         throw new Error('Something went wrong');
