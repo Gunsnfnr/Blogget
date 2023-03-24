@@ -7,7 +7,8 @@ export const useAuth = (token) => {
   const [auth, setAuth] = useState({});
   console.log('auth: ', auth);
 
-  // token += 'break token';
+  // token += 'break  token';
+
   useEffect(() => {
     if (!token) return;
     fetch(`${URL_API}/api/v1/me`, {
