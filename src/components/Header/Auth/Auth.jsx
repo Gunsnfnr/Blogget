@@ -13,6 +13,7 @@ export const Auth = ({token, delToken}) => {
   const logoutHandler = () => {
     delToken();
     setAuth({});
+    location.href = 'http://localhost:3000/';
   };
 
   // // token += 'break token';
