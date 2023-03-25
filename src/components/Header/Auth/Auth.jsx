@@ -7,7 +7,7 @@ import {Text} from '../../../UI/Text/Text';
 import {useAuth} from '../../../hooks/useAuthHook';
 
 export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useAuth('');
+  const [auth, setAuth] = useAuth(token);
   console.log(auth);
 
   const [isVisible, setVisible] = useState(false);

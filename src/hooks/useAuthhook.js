@@ -17,18 +17,16 @@ export const useAuth = (token) => {
       },
     })
       .then((response) => {
-        if (response.ok) {
-          console.log('response: ', response);
-          return response.json();
-        }
         if (response.status === 401) {
           console.log('response.status 401');
           delToken();
-        } else {
-          console.log('response.status: ', response.status);
+          throw new Error('Something went wrong');
         }
+        //  else {
+        //   console.log('response.status: ', response.status);
+        // }
         console.log('response: ', response);
-        throw new Error('Something went wrong');
+        return response.json();
       })
       .then(({name, icon_img: iconImg}) => {
         const img = iconImg.replace(/\?.*$/, '');
@@ -40,6 +38,6 @@ export const useAuth = (token) => {
       });
   }, [token]);
 
-  if (auth) return [auth];
+  return [auth];
 };
 
