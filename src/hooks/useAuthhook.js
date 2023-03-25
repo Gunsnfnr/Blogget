@@ -5,7 +5,6 @@ import {delToken} from './useToken.js';
 
 export const useAuth = (token) => {
   const [auth, setAuth] = useState({});
-  console.log('auth: ', auth);
 
   // token += 'break  token';
 
@@ -22,10 +21,6 @@ export const useAuth = (token) => {
           delToken();
           throw new Error('Something went wrong');
         }
-        //  else {
-        //   console.log('response.status: ', response.status);
-        // }
-        console.log('response: ', response);
         return response.json();
       })
       .then(({name, icon_img: iconImg}) => {
@@ -38,6 +33,6 @@ export const useAuth = (token) => {
       });
   }, [token]);
 
-  return [auth];
+  return [auth, setAuth];
 };
 

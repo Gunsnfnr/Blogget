@@ -8,8 +8,6 @@ import {useAuth} from '../../../hooks/useAuthHook';
 
 export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useAuth(token);
-  console.log(auth);
-
   const [isVisible, setVisible] = useState(false);
   // const [auth, setAuth] = useState({});
   const logoutHandler = () => {
