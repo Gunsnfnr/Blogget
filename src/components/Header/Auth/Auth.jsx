@@ -1,5 +1,4 @@
 import {useState, useContext} from 'react';
-import PropTypes from 'prop-types';
 import style from './Auth.module.css';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
@@ -8,8 +7,8 @@ import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
 
 export const Auth = () => {
-  const {token, delToken} = useContext(tokenContext);
-  console.log('token: ', token);
+  const {delToken} = useContext(tokenContext);
+  // console.log('token: ', token);
   const [isVisible, setVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
 
@@ -47,6 +46,3 @@ export const Auth = () => {
   );
 };
 
-Auth.propTypes = {
-  delToken: PropTypes.func,
-};
