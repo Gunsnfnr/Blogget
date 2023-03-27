@@ -7,6 +7,6 @@ export const Date = ({date}) => (
 );
 
 Date.propTypes = {
-  date: PropTypes.string,
+  date: PropTypes.number,
   // date: PropTypes.instanceOf(Date),
 };

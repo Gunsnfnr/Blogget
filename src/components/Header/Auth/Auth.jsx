@@ -8,7 +8,6 @@ import {authContext} from '../../../context/authContext';
 
 export const Auth = () => {
   const {delToken} = useContext(tokenContext);
-  // console.log('token: ', token);
   const [isVisible, setVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
 

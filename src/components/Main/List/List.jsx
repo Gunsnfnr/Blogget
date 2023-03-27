@@ -1,42 +1,22 @@
+// import {useGetBestPosts} from '../../../hooks/getbestposts.js';
 import style from './List.module.css';
 import Post from './Post';
+import {useContext} from 'react';
+import {postsContext} from '../../../context/postsContext.jsx';
 
 export const List = () => {
-  const postsData = [
-    {
-      thumbnail: '',
-      title: 'Title1',
-      author: 'Nickname1',
-      ups: 77,
-      date: '2023-05-24T05:41:00.000Z',
-      id: '45',
-    },
-    {
-      thumbnail: '',
-      title: 'Title2',
-      author: 'Nickname2',
-      ups: 58,
-      date: '2023-05-27T08:25:00.000Z',
-      id: '36',
-    },
-    {
-      thumbnail: '',
-      title: 'Title3',
-      author: 'Nickname3',
-      ups: 24,
-      date: '2023-05-24T09:45:00.000Z',
-      id: '76',
-    },
-    {
-      thumbnail: '',
-      title: 'Title4',
-      author: 'Nickname4',
-      ups: 124,
-      date: '2023-06-01T09:45:00.000Z',
-      id: '52',
-    },
-  ];
-
+  const {bestPosts} = useContext(postsContext);
+  const postsData = [];
+  for (let i = 0; i < bestPosts.length; i++) {
+    postsData[i] = {
+      thumbnail: bestPosts[i].data.thumbnail,
+      title: bestPosts[i].data.title,
+      author: bestPosts[i].data.author,
+      ups: bestPosts[i].data.ups,
+      date: bestPosts[i].data.created,
+      id: bestPosts[i].data.id,
+    };
+  }
   return (
     <ul className={style.list}>
       {postsData.map((postsData) => (
