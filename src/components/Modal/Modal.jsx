@@ -1,11 +1,20 @@
 import style from './Modal.module.css';
 import PropTypes from 'prop-types';
 import {ReactComponent as CloseIcon} from './img/close.svg';
-import Markdown from 'markdown-to-jsx';
+// import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
 import {useEffect, useRef} from 'react';
+import {useCommentsData} from '../../hooks/useCommentsData';
+import {Comments} from './Comments/Comments.jsx';
+// import {FormComment} from './FormComment/FormComment.jsx';
+// import {Text} from '../../UI/Text/Text.jsx';
 
-export const Modal = ({title, author, markdown, closeModal}) => {
+export const Modal = ({closeModal, id}) => {
+  const [commentsData] = useCommentsData(id);
+  // const post = commentsData[0];
+  // console.log('post: ', post);
+  const comments = commentsData[1];
+  // console.log('comments: ', comments);
   const overlayRef = useRef(null);
 
   const handleClick = e => {
@@ -24,24 +33,12 @@ export const Modal = ({title, author, markdown, closeModal}) => {
 
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
-      <div className={style.modal}>
-        <h2 className={style.title}>{title}</h2>
+      post && <div className={style.modal}>
 
-        <div className={style.content}>
-          <Markdown options={{
-            overrides: {
-              a: {
-                props: {
-                  target: '_blank',
-                },
-              },
-            },
-          }}>
-            {markdown}
-          </Markdown>
-        </div>
+        {/* <Text As='p' className={[style.author]}>{post.author}</Text> */}
 
-        <p className={style.author}>{author}</p>
+        {/* <FormComment /> */}
+        <Comments comments={comments} />
 
         <button className={style.close} onClick={(e) => closeModal()}>
           <CloseIcon/>
@@ -58,3 +55,22 @@ Modal.propTypes = {
   markdown: PropTypes.string,
   closeModal: PropTypes.func,
 };
+
+
+// {/* <h2 className={style.title}>{title}</h2> */}
+
+// {/* <div className={style.content}>
+//   <Markdown options={{
+//     overrides: {
+//       a: {
+//         props: {
+//           target: '_blank',
+//         },
+//       },
+//     },
+//   }}>
+//     {markdown}
+//   </Markdown>
+// </div> */}
+
+// {/* <p className={style.author}>{author}</p> */}

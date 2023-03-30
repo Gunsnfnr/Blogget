@@ -6,7 +6,6 @@ export const ImgComponent = (thumbnail) => {
   const [loading, setLoading] = useState(false);
   const img = new Image();
   img.src = thumbnail.thumbnail;
-  // let imageLoaded = false;
   img.onload = function() {
     setLoading(true);
   };

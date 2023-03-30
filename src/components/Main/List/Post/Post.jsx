@@ -14,11 +14,13 @@ export const Post = ({postData}) => {
     markdown,
     date,
     thumbnail,
+    id,
   } = postData;
+
   return (
     <li className={style.post}>
       <ImgCopmponent thumbnail={thumbnail}/>
-      <Content title={title} author={author} markdown={markdown}/>
+      <Content title={title} author={author} markdown={markdown} id={id}/>
       <Rating ups={ups}/>
       <Delete />
       <Date date={date}/>
