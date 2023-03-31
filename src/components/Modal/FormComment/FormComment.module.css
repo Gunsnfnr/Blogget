@@ -1,3 +1,9 @@
+.noform {
+  border-top: 1px solid var(--greyD9);
+  border-bottom: 1px solid var(--greyD9);
+  padding: 15px 0;
+  display: none;
+}
 .form {
   border-top: 1px solid var(--greyD9);
   border-bottom: 1px solid var(--greyD9);
@@ -13,6 +19,26 @@
 .btn {
   display: block;
   margin-left: auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--orange);
+  color: var(--white);
+  border: 1px solid transparent
+}
+.nobtn {
+  display: none;
+  margin-left: auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--orange);
+  color: var(--white);
+  border: 1px solid transparent
+}
+.btn_center {
+  display: block;
+  margin: auto;
   padding: 10px 20px;
   border-radius: 8px;
   outline: none;

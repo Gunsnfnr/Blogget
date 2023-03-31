@@ -6,15 +6,14 @@ import ReactDOM from 'react-dom';
 import {useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments.jsx';
-// import {FormComment} from './FormComment/FormComment.jsx';
-// import {Text} from '../../UI/Text/Text.jsx';
+import FormComment from './FormComment/FormComment';
+import {Text} from '../../UI/Text/Text';
+// import {authContext} from '../../context/authContext.jsx';
+// import { AuthContextProvider } from '../../context/authContext.jsx';
 
-export const Modal = ({closeModal, id}) => {
+export const Modal = ({closeModal, id, author}) => {
   const [commentsData] = useCommentsData(id);
-  // const post = commentsData[0];
-  // console.log('post: ', post);
   const comments = commentsData[1];
-  // console.log('comments: ', comments);
   const overlayRef = useRef(null);
 
   const handleClick = e => {
@@ -23,6 +22,9 @@ export const Modal = ({closeModal, id}) => {
       closeModal();
     }
   };
+
+  // const {auth} = useContext(authContext);
+  // const user = auth.name;
 
   useEffect(() => {
     document.addEventListener('click', handleClick);
@@ -33,11 +35,13 @@ export const Modal = ({closeModal, id}) => {
 
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
-      post && <div className={style.modal}>
+      <div className={style.modal}>
 
-        {/* <Text As='p' className={[style.author]}>{post.author}</Text> */}
+        <Text As='p' className={[style.author]}>{author}</Text>
 
-        {/* <FormComment /> */}
+        {/* <FormComment user = {auth.name}/> */}
+        <FormComment/>
+
         <Comments comments={comments} />
 
         <button className={style.close} onClick={(e) => closeModal()}>

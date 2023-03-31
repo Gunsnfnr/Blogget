@@ -36,7 +36,7 @@ export const Content = ({title, author, markdown, id}) => {
         id={id}
         // markdown={markdown}
         // title={title}
-        // author={author}
+        author={author}
         closeModal={
           () => {
             setIsModalOpen(false);
