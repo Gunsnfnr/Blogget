@@ -3,28 +3,30 @@ import PropTypes from 'prop-types';
 import {ReactComponent as CloseIcon} from './img/close.svg';
 // import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
-import {useEffect, useRef} from 'react';
+import {useContext, useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments.jsx';
 import FormComment from './FormComment/FormComment';
 import {Text} from '../../UI/Text/Text';
-// import {authContext} from '../../context/authContext.jsx';
-// import { AuthContextProvider } from '../../context/authContext.jsx';
+import {authContext} from '../../context/authContext.jsx';
+import {modalIsClosed} from '../Main/List/Post/Content/Content.jsx';
+
 
 export const Modal = ({closeModal, id, author}) => {
   const [commentsData] = useCommentsData(id);
   const comments = commentsData[1];
   const overlayRef = useRef(null);
+  // console.log('modalIsClosed: ', modalIsClosed);
 
   const handleClick = e => {
     const target = e.target;
     if (target === overlayRef.current) {
       closeModal();
+      // console.log('modalIsClosed: ', modalIsClosed);
     }
   };
 
-  // const {auth} = useContext(authContext);
-  // const user = auth.name;
+  const {auth} = useContext(authContext);
 
   useEffect(() => {
     document.addEventListener('click', handleClick);
@@ -38,10 +40,7 @@ export const Modal = ({closeModal, id, author}) => {
       <div className={style.modal}>
 
         <Text As='p' className={[style.author]}>{author}</Text>
-
-        {/* <FormComment user = {auth.name}/> */}
-        <FormComment/>
-
+        <FormComment user = {auth.name} modalIsClosed={modalIsClosed} />
         <Comments comments={comments} />
 
         <button className={style.close} onClick={(e) => closeModal()}>
