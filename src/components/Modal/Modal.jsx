@@ -9,20 +9,17 @@ import {Comments} from './Comments/Comments.jsx';
 import FormComment from './FormComment/FormComment';
 import {Text} from '../../UI/Text/Text';
 import {authContext} from '../../context/authContext.jsx';
-import {modalIsClosed} from '../Main/List/Post/Content/Content.jsx';
 
 
 export const Modal = ({closeModal, id, author}) => {
   const [commentsData] = useCommentsData(id);
   const comments = commentsData[1];
   const overlayRef = useRef(null);
-  // console.log('modalIsClosed: ', modalIsClosed);
 
   const handleClick = e => {
     const target = e.target;
     if (target === overlayRef.current) {
       closeModal();
-      // console.log('modalIsClosed: ', modalIsClosed);
     }
   };
 
@@ -40,7 +37,7 @@ export const Modal = ({closeModal, id, author}) => {
       <div className={style.modal}>
 
         <Text As='p' className={[style.author]}>{author}</Text>
-        <FormComment user = {auth.name} modalIsClosed={modalIsClosed} />
+        <FormComment user = {auth.name} />
         <Comments comments={comments} />
 
         <button className={style.close} onClick={(e) => closeModal()}>

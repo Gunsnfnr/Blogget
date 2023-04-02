@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text/Text.jsx';
 import {useState} from 'react';
 import Modal from '../../../../Modal';
-export let modalIsClosed = true;
-// console.log('modalIsClosed: ', modalIsClosed);
 
 export const Content = ({title, author, markdown, id}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,8 +17,6 @@ export const Content = ({title, author, markdown, id}) => {
           href='#post'
           onClick={() => {
             setIsModalOpen(true);
-            modalIsClosed = false;
-            // console.log('modalIsClosed: ', modalIsClosed);
           }}
         >
           {title}
@@ -44,12 +40,11 @@ export const Content = ({title, author, markdown, id}) => {
         closeModal={
           () => {
             setIsModalOpen(false);
-            modalIsClosed = true;
-            // console.log('modalIsClosed: ', modalIsClosed);
           }} />)}
     </div>
   );
 };
+
 
 Content.propTypes = {
   id: PropTypes.string,

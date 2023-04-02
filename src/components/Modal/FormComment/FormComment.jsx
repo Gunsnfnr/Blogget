@@ -1,14 +1,12 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Text} from '../../../UI/Text/Text.jsx';
 import style from './FormComment.module.css';
 import PropTypes from 'prop-types';
 
-let formClass = style.noform;
-let buttonClass = style.btn_center;
-
-const FormComment = ({user, modalIsClosed}) => {
+const FormComment = ({user}) => {
   const inputReference = useRef(null);
-  console.log('modalIsClosed: ', modalIsClosed);
+  const [showButton, setShowButton] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -17,35 +15,25 @@ const FormComment = ({user, modalIsClosed}) => {
   };
 
   useEffect(() => {
-    if (modalIsClosed) {
-      formClass = style.noform;
-      buttonClass = style.btn_center;
-    } else {
-      formClass = style.form;
-      buttonClass = style.nobtn;
-    }
-  }, [modalIsClosed]);
-
-  useEffect(() => {
-    inputReference.current.focus();
-  }, []);
+    showForm && inputReference.current.focus();
+  }, [showForm]);
 
   const handleBtn = () => {
-    formClass = style.form;
-    buttonClass = style.nobtn;
     console.log('handleBtn');
+    setShowButton(false);
+    setShowForm(true);
   };
 
   return (
     <>
-      <button className={buttonClass} onClick={handleBtn}>
+      {showButton && <button className={style.btn_center} onClick={handleBtn}>
         Написать комментарий
-      </button>
-      <form className={formClass} onSubmit={handlerSubmit}>
+      </button>}
+      {showForm && <form className={style.form} onSubmit={handlerSubmit}>
         <Text As='h3' size={14} tsize={18}>{user}</Text>
         <textarea ref={inputReference} className={style.textarea} ></textarea>
         <button className={style.btn}>Отправить</button>
-      </form>
+      </form>}
 
     </>
   );
@@ -54,6 +42,5 @@ export default FormComment;
 
 FormComment.propTypes = {
   user: PropTypes.string,
-  modalIsClosed: PropTypes.bool,
 };
 
