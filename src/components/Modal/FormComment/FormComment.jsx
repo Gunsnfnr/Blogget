@@ -1,37 +1,42 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Text} from '../../../UI/Text/Text.jsx';
 import style from './FormComment.module.css';
 import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateComment} from '../../../store';
 
 const FormComment = ({user}) => {
-  const inputReference = useRef(null);
+  const value = useSelector(state => state.comment);
+  const dispatch = useDispatch();
+
   const [showButton, setShowButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    console.log(inputReference.current.value);
-    inputReference.current.value = '';
+    console.log('value: ', value);
   };
 
-  useEffect(() => {
-    showForm && inputReference.current.focus();
-  }, [showForm]);
-
   const handleBtn = () => {
-    console.log('handleBtn');
     setShowButton(false);
     setShowForm(true);
   };
 
+  const handleChange = e => {
+    dispatch(updateComment(e.target.value));
+  };
+
   return (
     <>
-      {showButton && <button className={style.btn_center} onClick={handleBtn}>
+      {showButton && <button className={style.btn_center} autoFocus onClick={handleBtn}>
         Написать комментарий
       </button>}
-      {showForm && <form className={style.form} onSubmit={handlerSubmit}>
+      {showForm && <form className={style.form} autoFocus onSubmit={handlerSubmit}>
         <Text As='h3' size={14} tsize={18}>{user}</Text>
-        <textarea ref={inputReference} className={style.textarea} ></textarea>
+        <textarea className={style.textarea}
+          value={value}
+          onChange={handleChange}
+        />
         <button className={style.btn}>Отправить</button>
       </form>}
 

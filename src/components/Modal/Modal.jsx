@@ -36,9 +36,9 @@ export const Modal = ({closeModal, id, author}) => {
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
 
+        <Comments comments={comments} />
         <Text As='p' className={[style.author]}>{author}</Text>
         <FormComment user = {auth.name} />
-        <Comments comments={comments} />
 
         <button className={style.close} onClick={(e) => closeModal()}>
           <CloseIcon/>
