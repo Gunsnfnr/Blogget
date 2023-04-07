@@ -3,16 +3,17 @@ import style from './Auth.module.css';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
-import {tokenContext} from '../../../context/tokenContext';
+// import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
+import {deleteToken} from '../../../store/index.js';
 
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
+  // const {delToken} = useContext(tokenContext);
   const [isVisible, setVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
 
   const logoutHandler = () => {
-    delToken();
+    deleteToken();
     clearAuth({});
     // location.href = 'http://localhost:3000/';
   };

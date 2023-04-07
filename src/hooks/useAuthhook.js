@@ -1,11 +1,15 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
 import {URL_API} from '../api/const.js';
-import {tokenContext} from '../context/tokenContext';
+import {getToken} from '../api/token.js';
+import {deleteToken} from '../store/index.js';
+// import {tokenContext} from '../context/tokenContext';
 
 
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
-  const {token, delToken} = useContext(tokenContext);
+  // const {token, delToken} = useContext(tokenContext);
+  const token = getToken();
+  // console.log('token: ', token);
 
   // token += 'break  token';
 
@@ -19,7 +23,7 @@ export const useAuth = () => {
       .then((response) => {
         if (response.status === 401) {
           console.log('response.status 401');
-          delToken();
+          deleteToken();
           throw new Error('Something went wrong');
         }
         return response.json();
@@ -31,7 +35,7 @@ export const useAuth = () => {
       .catch(err => {
         console.log('err: ', err);
         setAuth({});
-        delToken();
+        deleteToken();
       });
   }, [token]);
 

@@ -1,10 +1,11 @@
-import {useEffect, useContext, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {URL_API} from '../api/const.js';
-import {tokenContext} from '../context/tokenContext';
+import {getToken} from '../api/token.js';
+// import {tokenContext} from '../context/tokenContext';
 
 export const useCommentsData = (id) => {
   const [commentsData, setCommentsData] = useState({});
-  const {token} = useContext(tokenContext);
+  const token = getToken();
 
   useEffect(() => {
     token && fetch(`${URL_API}/comments/${id}`, {

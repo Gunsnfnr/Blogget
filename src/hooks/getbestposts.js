@@ -1,10 +1,13 @@
-import {useEffect, useContext, useState} from 'react';
-import {URL_API} from '../api/const.js';
-import {tokenContext} from '../context/tokenContext';
+import {useEffect, useState} from 'react';
+import {URL_API} from '../api/const';
+import {getToken} from '../api/token';
+import {deleteToken} from '../store/index';
+// import {tokenContext} from '../context/tokenContext';
 
 export const useGetBestPosts = () => {
   const [bestPosts, setBestPosts] = useState({});
-  const {token, delToken} = useContext(tokenContext);
+  // const {token, delToken} = useContext(tokenContext);
+  const token = getToken();
 
   useEffect(() => {
     token && fetch(`${URL_API}/best`, {
@@ -16,7 +19,7 @@ export const useGetBestPosts = () => {
         if (response.status === 401) {
           // console.log('response: ', response);
           console.log('response.status 401');
-          delToken();
+          deleteToken();
           throw new Error('Something went wrong');
         }
         return response.json();
