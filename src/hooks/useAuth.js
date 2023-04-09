@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   authLogout, authRequestAsync,
-} from '../store/auth/action.js';
+} from '../store/auth/authAction.js';
 
 
 export const useAuth = () => {
