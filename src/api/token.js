@@ -17,10 +17,3 @@ export const getToken = () => {
 
   return token;
 };
-// export const delToken = () => {
-//   console.log();
-//   localStorage.clear();
-//   location.href = 'http://localhost:3000';
-// };
-
-

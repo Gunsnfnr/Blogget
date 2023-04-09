@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {URL_API} from '../api/const.js';
-import {getToken} from '../api/token.js';
-// import {tokenContext} from '../context/tokenContext';
 
 export const useCommentsData = (id) => {
   const [commentsData, setCommentsData] = useState({});
-  const token = getToken();
+  const token = useSelector(state => state.token.token);
 
   useEffect(() => {
     token && fetch(`${URL_API}/comments/${id}`, {

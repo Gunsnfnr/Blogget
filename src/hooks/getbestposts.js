@@ -1,13 +1,14 @@
 import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {URL_API} from '../api/const';
-import {getToken} from '../api/token';
-import {deleteToken} from '../store/index';
+import {deleteToken} from '../store/tokenReducer';
 // import {tokenContext} from '../context/tokenContext';
 
 export const useGetBestPosts = () => {
   const [bestPosts, setBestPosts] = useState({});
   // const {token, delToken} = useContext(tokenContext);
-  const token = getToken();
+  const token = useSelector(state => state.token.token);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     token && fetch(`${URL_API}/best`, {
@@ -19,7 +20,7 @@ export const useGetBestPosts = () => {
         if (response.status === 401) {
           // console.log('response: ', response);
           console.log('response.status 401');
-          deleteToken();
+          dispatch(deleteToken());
           throw new Error('Something went wrong');
         }
         return response.json();

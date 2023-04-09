@@ -5,15 +5,17 @@ import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
 // import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
-import {deleteToken} from '../../../store/index.js';
+import {deleteToken} from '../../../store/tokenReducer';
+import {useDispatch} from 'react-redux';
 
 export const Auth = () => {
   // const {delToken} = useContext(tokenContext);
   const [isVisible, setVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
+  const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    deleteToken();
+    dispatch(deleteToken());
     clearAuth({});
     // location.href = 'http://localhost:3000/';
   };

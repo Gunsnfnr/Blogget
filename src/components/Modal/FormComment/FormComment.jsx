@@ -3,10 +3,10 @@ import {Text} from '../../../UI/Text/Text.jsx';
 import style from './FormComment.module.css';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateComment} from '../../../store';
+import {updateComment} from '../../../store/commentReducer';
 
 const FormComment = ({user}) => {
-  const value = useSelector(state => state.comment);
+  const value = useSelector(state => state.comment.comment);
   const dispatch = useDispatch();
 
   const [showButton, setShowButton] = useState(true);
