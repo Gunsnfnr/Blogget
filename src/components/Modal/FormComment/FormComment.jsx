@@ -4,10 +4,12 @@ import style from './FormComment.module.css';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateComment} from '../../../store/commentReducer';
+import {useAuth} from '../../../hooks/useAuth.js';
 
-const FormComment = ({user}) => {
+const FormComment = () => {
   const value = useSelector(state => state.comment.comment);
   const dispatch = useDispatch();
+  const [auth] = useAuth();
 
   const [showButton, setShowButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -32,7 +34,7 @@ const FormComment = ({user}) => {
         Написать комментарий
       </button>}
       {showForm && <form className={style.form} autoFocus onSubmit={handlerSubmit}>
-        <Text As='h3' size={14} tsize={18}>{user}</Text>
+        <Text As='h3' size={14} tsize={18}>{auth.name}</Text>
         <textarea className={style.textarea}
           value={value}
           onChange={handleChange}

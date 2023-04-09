@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import {ReactComponent as CloseIcon} from './img/close.svg';
 // import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
-import {useContext, useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments.jsx';
 import FormComment from './FormComment/FormComment';
 import {Text} from '../../UI/Text/Text';
-import {authContext} from '../../context/authContext.jsx';
 
 
 export const Modal = ({closeModal, id, author}) => {
@@ -23,8 +22,6 @@ export const Modal = ({closeModal, id, author}) => {
     }
   };
 
-  const {auth} = useContext(authContext);
-
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => {
@@ -38,7 +35,7 @@ export const Modal = ({closeModal, id, author}) => {
 
         <Comments comments={comments} />
         <Text As='p' className={[style.author]}>{author}</Text>
-        <FormComment user = {auth.name} />
+        <FormComment/>
 
         <button className={style.close} onClick={(e) => closeModal()}>
           <CloseIcon/>
