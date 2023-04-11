@@ -1,14 +1,10 @@
-// import {useGetBestPosts} from '../../../hooks/getbestposts.js';
 import style from './List.module.css';
 import Post from './Post';
-import {useContext} from 'react';
-import {postsContext} from '../../../context/postsContext.jsx';
+import {useGetBestPosts} from '../../../hooks/getbestposts.js';
 
 export const List = () => {
-  const {bestPosts} = useContext(postsContext);
+  const [bestPosts] = useGetBestPosts();
   const postsData = [];
-  // console.log('bestPosts[0]:', bestPosts[0]);
-  // console.log('bestPosts[1]:', bestPosts[1]);
   for (let i = 0; i < bestPosts.length; i++) {
     postsData[i] = {
       title: bestPosts[i].data.title,
