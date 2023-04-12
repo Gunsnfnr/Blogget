@@ -45,7 +45,6 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
         };
       }
 
-      console.log('postsData: ', postsData);
       dispatch(postsDataRequestSuccess(postsData));
     })
     .catch(err => {
