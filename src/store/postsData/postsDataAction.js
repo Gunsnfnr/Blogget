@@ -21,6 +21,8 @@ export const postsDataRequestError = (error) => ({
 });
 
 export const postsDataRequestAsync = () => (dispatch, getState) => {
+  dispatch(postsDataRequest());
+
   const token = getState().token.token;
   token && axios(`${URL_API}/best`, {
     headers: {
@@ -28,9 +30,23 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
     },
   })
     .then(({data: bestPosts}) => {
-      dispatch(postsDataRequestSuccess());
       const data = bestPosts.data.children;
-      dispatch(postsDataRequestSuccess(data));
+      const postsData = [];
+
+      for (let i = 0; i < data.length; i++) {
+        postsData[i] = {
+          title: data[i].data.title,
+          author: data[i].data.author,
+          ups: data[i].data.ups,
+          markdown: data[i].data.selftext,
+          date: data[i].data.created,
+          id: data[i].data.id,
+          thumbnail: data[i].data.thumbnail,
+        };
+      }
+
+      console.log('postsData: ', postsData);
+      dispatch(postsDataRequestSuccess(postsData));
     })
     .catch(err => {
       dispatch(postsDataRequestError(err));
