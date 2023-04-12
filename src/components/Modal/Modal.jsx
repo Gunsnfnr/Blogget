@@ -12,6 +12,8 @@ import {Text} from '../../UI/Text/Text';
 
 export const Modal = ({closeModal, id, author}) => {
   const [commentsData] = useCommentsData(id);
+  console.log('commentsData!: ', commentsData);
+  console.log('typeof_commentsData!: ', typeof(commentsData));
   const comments = commentsData[1];
   const overlayRef = useRef(null);
 
