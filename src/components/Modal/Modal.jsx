@@ -15,7 +15,6 @@ export const Modal = ({closeModal, id, author}) => {
   const loading = useSelector(state => state.commentsData.loading);
   const error = useSelector(state => state.commentsData.error);
   const commentsData = useSelector(state => state.commentsData.data);
-  console.log('commentsData: ', commentsData);
 
   const dispatch = useDispatch();
   let status = '';
@@ -24,13 +23,17 @@ export const Modal = ({closeModal, id, author}) => {
     dispatch(commentsDataRequestAsync(id));
   }, [token]);
 
-  console.log('status: ', status);
-
   const comments = commentsData[1];
 
-  loading ? status = 'loading' : '';
-  error ? status = 'error' : '';
-  (comments) ? status = 'loaded' : '';
+  if (loading) {
+    status = 'loading';
+  }
+  if (error) {
+    status = 'error';
+  }
+  if (comments) {
+    status = 'loaded';
+  }
 
   const overlayRef = useRef(null);
 
