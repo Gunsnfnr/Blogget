@@ -27,7 +27,10 @@ export const Comments = ({comments}) => {
       'There are no comments for this post'
     );
   }
-  return comments ? returnContent : (<div className={style.author}>Loading...</div>);
+  return comments ? returnContent : (
+    ''
+    // <div className={style.author}>Loading...</div>
+  );
 };
 
 Comments.propTypes = {

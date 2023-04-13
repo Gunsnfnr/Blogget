@@ -6,7 +6,7 @@ import {Text} from '../../../UI/Text/Text';
 import {deleteToken} from '../../../store/tokenReducer';
 import {useDispatch} from 'react-redux';
 import {useAuth} from '../../../hooks/useAuth.js';
-import Authloader from './Authloader';
+import Authloader from '../../../UI/Authloader';
 
 export const Auth = () => {
   const [isVisible, setVisible] = useState(false);
