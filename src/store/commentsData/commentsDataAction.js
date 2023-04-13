@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {useSelector} from 'react-redux';
 import {URL_API} from '../../api/const.js';
 
 export const COMMENTSDATA_REQUEST = 'COMMENTSDATA_REQUEST';
@@ -24,7 +23,7 @@ export const commentsDataRequestError = (error) => ({
 
 export const commentsDataRequestAsync = (id) => (dispatch, getState) => {
   dispatch(commentsDataRequest());
-  const token = useSelector(state => state.token.token);
+  const token = getState().token.token;
 
   token && axios(`${URL_API}/comments/${id}`, {
     headers: {
