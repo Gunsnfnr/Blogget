@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   data: [],
   error: '',
+  after: '',
 };
 
 export const postsDataReducer = (state = initialState, action) => {
@@ -25,6 +26,7 @@ export const postsDataReducer = (state = initialState, action) => {
         loading: false,
         data: action.data,
         error: '',
+        after: action.after,
       };
 
     case POSTSDATA_REQUEST_ERROR:

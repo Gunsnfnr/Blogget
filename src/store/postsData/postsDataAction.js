@@ -13,6 +13,7 @@ export const postsDataRequest = () => ({
 export const postsDataRequestSuccess = (data) => ({
   type: POSTSDATA_REQUEST_SUCCESS,
   data,
+  after: data.after,
 });
 
 export const postsDataRequestError = (error) => ({
@@ -24,7 +25,7 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
   dispatch(postsDataRequest());
 
   const token = getState().token.token;
-  token && axios(`${URL_API}/best`, {
+  token && axios(`${URL_API}/best?limit=10`, {
     headers: {
       Authorization: `bearer ${token}`,
     },
