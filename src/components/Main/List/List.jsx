@@ -19,8 +19,11 @@ export const List = () => {
   console.log('bestPosts.length: ', bestPosts.length);
 
   useEffect(() => {
+    console.log('in useEffect');
     if (!bestPosts.length) return;
+    console.log('1');
     const observer = new IntersectionObserver((entries) => {
+      console.log(entries);
       if (entries[0].isIntersecting) {
         console.log('вижу-вижу');
       }
