@@ -23,15 +23,19 @@ export const postsDataRequestError = (error) => ({
 
 export const postsDataRequestAsync = () => (dispatch, getState) => {
   dispatch(postsDataRequest());
-
   const token = getState().token.token;
-  token && axios(`${URL_API}/best?limit=10`, {
+  const after = getState().postsData.after;
+  console.log('state: ', getState());
+  console.log('after: ', after);
+
+  token && axios(`${URL_API}/best?limit=10${after ? `after=${after}` : ''}`, {
     headers: {
       Authorization: `bearer ${token}`,
     },
   })
     .then(({data: bestPosts}) => {
       const data = bestPosts.data.children;
+      const after = bestPosts.data.after;
       const postsData = [];
 
       for (let i = 0; i < data.length; i++) {
@@ -46,7 +50,7 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
         };
       }
 
-      dispatch(postsDataRequestSuccess(postsData));
+      dispatch(postsDataRequestSuccess([postsData, after]));
     })
     .catch(err => {
       dispatch(postsDataRequestError(err));

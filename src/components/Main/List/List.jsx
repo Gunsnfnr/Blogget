@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {CircleLoader} from 'react-spinners';
 import {postsDataRequestAsync} from '../../../store/postsData/postsDataAction.js';
@@ -10,10 +10,26 @@ export const List = () => {
   const token = useSelector(state => state.token.token);
   const loading = useSelector(state => state.postsData.loading);
   const dispatch = useDispatch();
+  const endList = useRef(null);
 
   useEffect(() => {
     dispatch(postsDataRequestAsync());
   }, [token]);
+
+  console.log('bestPosts.length: ', bestPosts.length);
+
+  useEffect(() => {
+    if (!bestPosts.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        console.log('вижу-вижу');
+      }
+    }, {
+      rootMargin: '100px',
+    });
+
+    observer.observe(endList.current);
+  }, [endList.current]);
 
   return (
     <ul className={style.list}>
@@ -22,6 +38,7 @@ export const List = () => {
       ) : bestPosts.map((postsData) => (
         <Post key={postsData.id} postData={postsData} />
       ))}
+      <li ref={endList} className={style.end}/>
     </ul>
   );
 };
