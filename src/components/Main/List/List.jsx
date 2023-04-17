@@ -32,14 +32,12 @@ export const List = () => {
 
   return (
     <ul className={style.list}>
-      {/* {(token && !loading) && bestPosts.map((postsData) => (
-        <Post key={postsData.id} postData={postsData} />
-      ))} */}
-      { (token && loading) ? (
-        <CircleLoader color='#94f285' css={{display: 'block'}} size={150} />
-      ) : bestPosts.map((postsData) => (
+      {bestPosts.map((postsData) => (
         <Post key={postsData.id} postData={postsData} />
       ))}
+      { (token && loading) ?
+        <CircleLoader color='#94f285' css={{display: 'block'}} size={150} /> : ''
+      }
       <li ref={endList} className={style.end}/>
     </ul>
   );

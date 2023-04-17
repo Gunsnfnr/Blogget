@@ -29,15 +29,13 @@ export const postsDataRequestError = (error) => ({
 });
 
 export const postsDataRequestAsync = () => (dispatch, getState) => {
-  dispatch(postsDataRequest());
   const token = getState().token.token;
   const after = getState().postsData.after;
   const loading = getState().postsData.loading;
-  console.log('loading: ', loading);
   const isLast = getState().postsData.isLast;
 
-  // if (!token || loading) return;
-  if (!token || isLast) return;
+  if (!token || loading || isLast) return;
+  dispatch(postsDataRequest());
 
   token && axios(`${URL_API}/best?limit=10&${after ? `after=${after}` : ''}`, {
     headers: {
@@ -62,7 +60,6 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
         };
       }
 
-      // dispatch(postsDataRequestSuccess([postsData, after]));
       if (after) {
         dispatch(postsDataRequestSuccessAfter([postsData, after]));
       } else {
