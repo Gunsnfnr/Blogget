@@ -1,12 +1,13 @@
 import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {CircleLoader} from 'react-spinners';
-import {postsDataRequestAsync} from '../../../store/postsData/postsDataAction.js';
+import {postsDataRequestAsync} from '../../../store/postsData/postsDataAction';
 import style from './List.module.css';
 import Post from './Post';
 
 export const List = () => {
-  const bestPosts = useSelector(state => state.postsData.data);
+  const bestPosts = useSelector(state => state.postsData.posts);
+  // console.log('bestPosts: ', bestPosts);
   const token = useSelector(state => state.token.token);
   const loading = useSelector(state => state.postsData.loading);
   const dispatch = useDispatch();
@@ -16,26 +17,24 @@ export const List = () => {
     dispatch(postsDataRequestAsync());
   }, [token]);
 
-  console.log('bestPosts.length: ', bestPosts.length);
-
   useEffect(() => {
-    console.log('in useEffect');
     if (!bestPosts.length) return;
-    console.log('1');
     const observer = new IntersectionObserver((entries) => {
-      console.log(entries);
       if (entries[0].isIntersecting) {
-        console.log('вижу-вижу');
+        dispatch(postsDataRequestAsync());
       }
     }, {
       rootMargin: '100px',
     });
 
     observer.observe(endList.current);
-  }, [endList.current]);
+  }, [endList.current, bestPosts]);
 
   return (
     <ul className={style.list}>
+      {/* {(token && !loading) && bestPosts.map((postsData) => (
+        <Post key={postsData.id} postData={postsData} />
+      ))} */}
       { (token && loading) ? (
         <CircleLoader color='#94f285' css={{display: 'block'}} size={150} />
       ) : bestPosts.map((postsData) => (

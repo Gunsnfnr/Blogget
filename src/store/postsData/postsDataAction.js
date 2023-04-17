@@ -4,6 +4,7 @@ import {URL_API} from '../../api/const.js';
 export const POSTSDATA_REQUEST = 'POSTSDATA_REQUEST';
 export const POSTSDATA_REQUEST_SUCCESS = 'POSTSDATA_REQUEST_SUCCESS';
 export const POSTSDATA_REQUEST_ERROR = 'POSTSDATA_REQUEST_ERROR';
+export const POSTSDATA_REQUEST_SUCCESS_AFTER = 'POSTSDATA_REQUEST_SUCCESS_AFTER';
 
 export const postsDataRequest = () => ({
   type: POSTSDATA_REQUEST,
@@ -12,7 +13,13 @@ export const postsDataRequest = () => ({
 
 export const postsDataRequestSuccess = (data) => ({
   type: POSTSDATA_REQUEST_SUCCESS,
-  data,
+  posts: data,
+  after: data.after,
+});
+
+export const postsDataRequestSuccessAfter = (data) => ({
+  type: POSTSDATA_REQUEST_SUCCESS_AFTER,
+  posts: data,
   after: data.after,
 });
 
@@ -25,16 +32,21 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
   dispatch(postsDataRequest());
   const token = getState().token.token;
   const after = getState().postsData.after;
-  console.log('state: ', getState());
-  console.log('after: ', after);
+  const loading = getState().postsData.loading;
+  console.log('loading: ', loading);
+  const isLast = getState().postsData.isLast;
 
-  token && axios(`${URL_API}/best?limit=10${after ? `after=${after}` : ''}`, {
+  // if (!token || loading) return;
+  if (!token || isLast) return;
+
+  token && axios(`${URL_API}/best?limit=10&${after ? `after=${after}` : ''}`, {
     headers: {
       Authorization: `bearer ${token}`,
     },
   })
     .then(({data: bestPosts}) => {
       const data = bestPosts.data.children;
+      // console.log('data: ', data);
       const after = bestPosts.data.after;
       const postsData = [];
 
@@ -50,7 +62,12 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
         };
       }
 
-      dispatch(postsDataRequestSuccess([postsData, after]));
+      // dispatch(postsDataRequestSuccess([postsData, after]));
+      if (after) {
+        dispatch(postsDataRequestSuccessAfter([postsData, after]));
+      } else {
+        dispatch(postsDataRequestSuccess([postsData, after]));
+      }
     })
     .catch(err => {
       dispatch(postsDataRequestError(err));
