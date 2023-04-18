@@ -7,13 +7,13 @@ import Post from './Post';
 import {Outlet, useParams} from 'react-router-dom';
 
 export const List = () => {
-  const bestPosts = useSelector(state => state.postsData.posts);
+  const loadedPosts = useSelector(state => state.postsData.posts);
   const token = useSelector(state => state.token.token);
   const loading = useSelector(state => state.postsData.loading);
+  const dispatch = useDispatch();
   const {page} = useParams();
   console.log('page: ', page);
 
-  const dispatch = useDispatch();
   const endList = useRef(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const List = () => {
   // }, [token]);
 
   useEffect(() => {
-    if (!bestPosts.length) return;
+    if (!loadedPosts.length) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         dispatch(postsDataRequestAsync());
@@ -40,12 +40,12 @@ export const List = () => {
         observer.unobserve(endList.current);
       }
     };
-  }, [endList.current, bestPosts]);
+  }, [endList.current, loadedPosts]);
 
   return (
     <>
       <ul className={style.list}>
-        {bestPosts.map((postsData) => (
+        {loadedPosts.map((postsData) => (
           <Post key={postsData.id} postData={postsData} />
         ))}
         { (token && loading) ?

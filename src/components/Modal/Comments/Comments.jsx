@@ -15,7 +15,9 @@ export const Comments = ({comments}) => {
           <Date date={comments[i].created} />
         </li>
       );
-      returnArr.push(fragment);
+      if (comments[i].body) {
+        returnArr.push(fragment);
+      }
     }
     returnContent = (
       <ul className={style.list}>

@@ -9,11 +9,7 @@ export const Content = ({title, author, markdown, id}) => {
     <div className={style.content}>
       <Text As='h2' className={[style.title, style.medium]}>
         <Link className={style.linkPost} to={`/category/${page}/post/${id}`}>
-          <Text bold
-            size={18}
-            tsize={24}
-            className={style.linkPost}
-          >
+          <Text bold size={18} tsize={24} className={style.linkPost}>
             {title}
           </Text>
         </Link>

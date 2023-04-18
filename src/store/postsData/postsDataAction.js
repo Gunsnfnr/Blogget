@@ -53,9 +53,9 @@ export const postsDataRequestAsync = (newPage) => (dispatch, getState) => {
       Authorization: `bearer ${token}`,
     },
   })
-    .then(({data: bestPosts}) => {
-      const data = bestPosts.data.children;
-      const after = bestPosts.data.after;
+    .then(({data: loadedPosts}) => {
+      const data = loadedPosts.data.children;
+      const after = loadedPosts.data.after;
       const postsData = [];
 
       for (let i = 0; i < data.length; i++) {
