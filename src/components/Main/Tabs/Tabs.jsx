@@ -13,10 +13,10 @@ import {Text} from '../../../UI/Text/Text.jsx';
 import {useNavigate} from 'react-router-dom';
 
 const LIST = [
-  {value: 'Главная', Icon: HomeIcon, link: 'rising'},
-  {value: 'Топ', Icon: TopIcon, link: 'top'},
-  {value: 'Лучшие', Icon: BestIcon, link: 'best'},
-  {value: 'Горячие', Icon: HotIcon, link: 'hot'},
+  {value: 'Main', Icon: HomeIcon, link: 'rising'},
+  {value: 'Top', Icon: TopIcon, link: 'top'},
+  {value: 'Best', Icon: BestIcon, link: 'best'},
+  {value: 'Hot', Icon: HotIcon, link: 'hot'},
 ].map(assignId);
 
 export const Tabs = () => {
@@ -49,7 +49,7 @@ export const Tabs = () => {
           className={style.btn}
           onClick={
             () => setIsDropdownOpen(!isDropdownOpen)
-          }><Text className={style.bold}>{mainIconText || 'Главная'}</Text>
+          }><Text className={style.bold}>{mainIconText || 'Home'}</Text>
           <ArrowIcon width={15} height={15}/>
         </button>
       </div>)}

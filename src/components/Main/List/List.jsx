@@ -24,7 +24,8 @@ export const List = () => {
   // }, [token]);
 
   useEffect(() => {
-    if (!loadedPosts.length) return;
+    if (!loadedPosts.length || loadedPosts.length === 30) return;
+    console.log('loadedPosts.length: ', loadedPosts.length);
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         dispatch(postsDataRequestAsync());
@@ -32,7 +33,6 @@ export const List = () => {
     }, {
       rootMargin: '100px',
     });
-
     observer.observe(endList.current);
     return () => {
       if (endList.current) {
@@ -49,6 +49,8 @@ export const List = () => {
         ))}
         { (token && loading) ?
           <CircleLoader color='#94f285' css={{display: 'block'}} size={150} /> : ''
+        }{ (!token) ?
+          <div>You are not logged in</div> : ''
         }
         <li ref={endList} className={style.end}/>
       </ul>

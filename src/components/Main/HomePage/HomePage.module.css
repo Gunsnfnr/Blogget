@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 70px 0 90px;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.title {
+  color:rgb(39, 151, 39);
+  font-weight: 900;
+  font-size: 38px;
+}
+.welcome {
+  font-weight: 600;
+  font-size: 22px;
+}
+.choose {
+  font-weight: 500;
+  font-size: 20px;
+}

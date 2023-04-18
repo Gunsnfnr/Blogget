@@ -10,7 +10,7 @@ export const Header = () => (
     <Layout>
       <div className={style.gridContainer}>
         <Logo/>
-        <Heading text="Главная" />
+        <Heading text="Main page" />
         <Search/>
         <Auth />
       </div>

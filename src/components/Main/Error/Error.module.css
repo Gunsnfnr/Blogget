@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 70px 20px 90px;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.title {
+  color:rgb(150, 13, 8);
+  font-weight: 900;
+  font-size: 38px;
+}
+.oops {
+  color:rgb(43, 43, 43);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 3px;
+}
+.error_text {
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+}
