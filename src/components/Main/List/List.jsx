@@ -1,10 +1,11 @@
 import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {CircleLoader} from 'react-spinners';
-import {postsDataRequestAsync} from '../../../store/postsData/postsDataAction';
+
 import style from './List.module.css';
 import Post from './Post';
 import {Outlet, useParams} from 'react-router-dom';
+import {postsDataRequestAsync} from '../../../store/postsData/postsDataAction';
 
 export const List = () => {
   const loadedPosts = useSelector(state => state.postsData.posts);
@@ -12,8 +13,6 @@ export const List = () => {
   const loading = useSelector(state => state.postsData.loading);
   const dispatch = useDispatch();
   const {page} = useParams();
-  console.log('page: ', page);
-
   const endList = useRef(null);
 
   useEffect(() => {
