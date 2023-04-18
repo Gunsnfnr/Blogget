@@ -1,4 +1,5 @@
 import {
+  CHANGE_PAGE,
   POSTSDATA_REQUEST,
   POSTSDATA_REQUEST_ERROR,
   POSTSDATA_REQUEST_SUCCESS,
@@ -12,6 +13,7 @@ const initialState = {
   error: '',
   after: '',
   isLast: false,
+  page: '',
 };
 
 export const postsDataReducer = (state = initialState, action) => {
@@ -47,6 +49,14 @@ export const postsDataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.error,
+      };
+
+    case CHANGE_PAGE:
+      return {
+        ...state,
+        page: action.page,
+        after: '',
+        isLast: false,
       };
 
     default:

@@ -5,6 +5,7 @@ export const POSTSDATA_REQUEST = 'POSTSDATA_REQUEST';
 export const POSTSDATA_REQUEST_SUCCESS = 'POSTSDATA_REQUEST_SUCCESS';
 export const POSTSDATA_REQUEST_ERROR = 'POSTSDATA_REQUEST_ERROR';
 export const POSTSDATA_REQUEST_SUCCESS_AFTER = 'POSTSDATA_REQUEST_SUCCESS_AFTER';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
 
 export const postsDataRequest = () => ({
   type: POSTSDATA_REQUEST,
@@ -28,7 +29,17 @@ export const postsDataRequestError = (error) => ({
   error,
 });
 
-export const postsDataRequestAsync = () => (dispatch, getState) => {
+export const changePage = (page) => ({
+  type: CHANGE_PAGE,
+  page,
+});
+
+export const postsDataRequestAsync = (newPage) => (dispatch, getState) => {
+  let page = getState().postsData.page;
+  if (newPage) {
+    page = newPage;
+    dispatch(changePage(page));
+  }
   const token = getState().token.token;
   const after = getState().postsData.after;
   const loading = getState().postsData.loading;
@@ -37,14 +48,13 @@ export const postsDataRequestAsync = () => (dispatch, getState) => {
   if (!token || loading || isLast) return;
   dispatch(postsDataRequest());
 
-  token && axios(`${URL_API}/best?limit=10&${after ? `after=${after}` : ''}`, {
+  token && axios(`${URL_API}/${page}?limit=10&${after ? `after=${after}` : ''}`, {
     headers: {
       Authorization: `bearer ${token}`,
     },
   })
     .then(({data: bestPosts}) => {
       const data = bestPosts.data.children;
-      // console.log('data: ', data);
       const after = bestPosts.data.after;
       const postsData = [];
 
