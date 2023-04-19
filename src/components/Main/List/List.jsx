@@ -25,7 +25,6 @@ export const List = () => {
 
   useEffect(() => {
     if (!loadedPosts.length || loadedPosts.length === 30) return;
-    console.log('loadedPosts.length: ', loadedPosts.length);
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         dispatch(postsDataRequestAsync());
@@ -40,7 +39,6 @@ export const List = () => {
       }
     };
   }, [endList.current, loadedPosts]);
-
   return (
     <>
       <ul className={style.list}>
@@ -52,6 +50,15 @@ export const List = () => {
         }{ (!token) ?
           <div>You are not logged in</div> : ''
         }
+        {loadedPosts.length === 30 ?
+        <div className={style.end}>
+          <div className={style.btn}
+            onClick={ () => {
+              dispatch(postsDataRequestAsync());
+            }
+            }
+          >Load more posts</div>
+        </div> : ''}
         <li ref={endList} className={style.end}/>
       </ul>
       <Outlet />

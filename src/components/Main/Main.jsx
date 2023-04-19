@@ -7,6 +7,8 @@ import Modal from '../Modal';
 import {HomePage} from './HomePage/HomePage.jsx';
 import {Error} from './Error/Error.jsx';
 
+const containsToken = window.location.toString().includes('token');
+
 export const Main = () => (
   <main className={style.main}>
     <Layout>
@@ -16,7 +18,12 @@ export const Main = () => (
           <Route path='post/:id' element={<Modal/>} />
         </Route>
         <Route path='/' element={<HomePage />}/>
-        <Route path='*' element={<Error />}/>
+        <Route path="*" element={
+          containsToken ?
+          <HomePage /> :
+          <Error />
+        }
+        />
       </Routes>
     </Layout>
   </main>
