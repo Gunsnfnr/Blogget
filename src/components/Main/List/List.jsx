@@ -19,10 +19,6 @@ export const List = () => {
     dispatch(postsDataRequestAsync(page));
   }, [page]);
 
-  // useEffect(() => {
-  //   dispatch(postsDataRequestAsync());
-  // }, [token]);
-
   useEffect(() => {
     if (!loadedPosts.length || loadedPosts.length === 30) return;
     const observer = new IntersectionObserver((entries) => {
