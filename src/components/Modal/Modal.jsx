@@ -6,7 +6,7 @@ import {useEffect, useRef} from 'react';
 import {Comments} from './Comments/Comments.jsx';
 import FormComment from './FormComment/FormComment';
 import {Text} from '../../UI/Text/Text';
-import {commentsDataRequestAsync} from '../../store/commentsData/commentsDataAction.js';
+import {commentsDataRequestAsync} from '../../store/comments/commentsAction.js';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate, useParams} from 'react-router-dom';
 
@@ -15,28 +15,15 @@ export const Modal = () => {
   const {id, page} = useParams();
   const navigate = useNavigate();
   const token = useSelector(state => state.token.token);
-  const loading = useSelector(state => state.commentsData.loading);
-  const error = useSelector(state => state.commentsData.error);
-  const commentsData = useSelector(state => state.commentsData.data);
+  const post = useSelector(state => state.comments.post);
+  const commentsData = useSelector(state => state.comments.comments);
+  const status = useSelector(state => state.comments.status);
 
   const dispatch = useDispatch();
-  let status = '';
 
   useEffect(() => {
     dispatch(commentsDataRequestAsync(id));
   }, [token]);
-
-  const comments = commentsData[1];
-
-  if (loading) {
-    status = 'loading';
-  }
-  if (error) {
-    status = 'error';
-  }
-  if (comments) {
-    status = 'loaded';
-  }
 
   const overlayRef = useRef(null);
 
@@ -61,13 +48,11 @@ export const Modal = () => {
         {status === 'error' && 'Ошибка'}
         {status === 'loaded' && (
           <>
-            <Comments comments={comments} />
+            <Comments comments={commentsData} />
             <Text As='p' className={[style.author]}>
-              {/* {author} */}
-              Автор поста
+              {post.author}
             </Text>
             <FormComment/>
-
             <button className={style.close} onClick={() => {
               navigate(`/category/${page}`);
             }
