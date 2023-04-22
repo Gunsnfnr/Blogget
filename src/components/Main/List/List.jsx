@@ -5,7 +5,7 @@ import {CircleLoader} from 'react-spinners';
 import style from './List.module.css';
 import Post from './Post';
 import {Outlet, useParams} from 'react-router-dom';
-import {postsDataRequestAsync} from '../../../store/postsData/postsDataAction';
+import {postsDataRequestAsync} from '../../../store/posts/postsDataAction';
 
 export const List = () => {
   const loadedPosts = useSelector(state => state.postsData.posts);
@@ -20,7 +20,7 @@ export const List = () => {
   }, [page]);
 
   useEffect(() => {
-    if (!loadedPosts.length || loadedPosts.length === 30) return;
+    if (!loadedPosts.length || loadedPosts.length > 29) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         dispatch(postsDataRequestAsync());
@@ -46,7 +46,7 @@ export const List = () => {
         }{ (!token) ?
           <div>You are not logged in</div> : ''
         }
-        {loadedPosts.length === 30 ?
+        {loadedPosts.length > 29 ?
         <div className={style.end}>
           <div className={style.btn}
             onClick={ () => {
