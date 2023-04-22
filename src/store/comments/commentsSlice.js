@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {commentsDataRequestAsync} from './commentsAction';
 
 const initialState = {
   loading: false,
@@ -10,20 +11,21 @@ const initialState = {
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
-  reducers: {
-    commentsDataRequest: (state) => {
+  reducers: {},
+  extraReducers: {
+    [commentsDataRequestAsync.pending.type]: (state) => {
       // state.loading = true;
       state.error = '';
       state.status = 'loading';
     },
-    commentsDataRequestSuccess: (state, action) => {
+    [commentsDataRequestAsync.fulfilled.type]: (state, action) => {
       // state.loading = false;
       state.post = action.payload.post;
       state.comments = action.payload.comments;
       state.error = '';
       state.status = 'loaded';
     },
-    commentsDataRequestError: (state, action) => {
+    [commentsDataRequestAsync.rejected.type]: (state, action) => {
       // state.loading = false;
       state.error = action.payload.error;
       state.status = 'error';
