@@ -13,17 +13,17 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [commentsDataRequestAsync.pending.type]: (state) => {
+    [commentsDataRequestAsync.pending]: (state) => {
       state.error = '';
       state.status = 'loading';
     },
-    [commentsDataRequestAsync.fulfilled.type]: (state, action) => {
+    [commentsDataRequestAsync.fulfilled]: (state, action) => {
       state.post = action.payload.post;
       state.comments = action.payload.comments;
       state.error = '';
       state.status = 'loaded';
     },
-    [commentsDataRequestAsync.rejected.type]: (state, action) => {
+    [commentsDataRequestAsync.rejected]: (state, action) => {
       state.error = action.payload.error;
       state.status = 'error';
     },

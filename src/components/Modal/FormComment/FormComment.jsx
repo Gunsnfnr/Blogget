@@ -31,7 +31,7 @@ const FormComment = () => {
   return (
     <>
       {showButton && <button className={style.btn_center} autoFocus onClick={handleBtn}>
-        Написать комментарий
+      Write a comment
       </button>}
       {showForm && <form className={style.form} autoFocus onSubmit={handlerSubmit}>
         <Text As='h3' size={14} tsize={18}>{auth.name}</Text>
@@ -39,7 +39,7 @@ const FormComment = () => {
           value={value}
           onChange={handleChange}
         />
-        <button className={style.btn}>Отправить</button>
+        <button className={style.btn}>Post comment</button>
       </form>}
 
     </>

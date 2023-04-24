@@ -44,8 +44,8 @@ export const Modal = () => {
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
-        {status === 'loading' && 'Загрузка...'}
-        {status === 'error' && 'Ошибка'}
+        {status === 'loading' && 'Loading...'}
+        {status === 'error' && 'An error occurred'}
         {status === 'loaded' && (
           <>
             <Comments comments={commentsData} />

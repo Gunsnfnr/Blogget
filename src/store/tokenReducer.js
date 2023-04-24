@@ -16,8 +16,6 @@ export const updateToken = (token) => ({
 export const deleteToken = () => ({
   type: DELETE_TOKEN,
   token: '',
-  // localStorage.removeItem('bearer');
-  // location.href = 'http://localhost:3000';
 });
 
 export const tokenMiddleware = (store) => (next) => (action) => {

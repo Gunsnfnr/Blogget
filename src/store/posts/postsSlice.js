@@ -7,6 +7,7 @@ const initialState = {
   after: '',
   isLast: false,
   page: '',
+  payload: '',
 };
 
 export const postsSlice = createSlice({
@@ -21,6 +22,7 @@ export const postsSlice = createSlice({
       state.loading = false;
       state.posts = action.payload.postsData;
       state.error = '';
+      // state.payload = action.payload;
       state.after = action.payload.after;
       state.isLast = !action.payload.after;
     },

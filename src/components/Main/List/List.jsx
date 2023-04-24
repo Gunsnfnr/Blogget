@@ -14,6 +14,8 @@ export const List = () => {
   const dispatch = useDispatch();
   const {page} = useParams();
   const endList = useRef(null);
+  // const payload = useSelector(state => state.payload);
+  // console.log('payload: ', payload);
 
   useEffect(() => {
     dispatch(postsDataRequestAsync(page));
