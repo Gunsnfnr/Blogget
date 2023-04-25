@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {URL_API} from '../../api/const.js';
-// import {postsSlice} from './postsSlice.js';
+import {postsSlice} from './postsSlice.js';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
 // export const POSTSDATA_REQUEST = 'POSTSDATA_REQUEST';
@@ -91,9 +91,7 @@ export const postsDataRequestAsync = createAsyncThunk(
     let page = getState().postsData.page;
     if (newPage) {
       page = newPage;
-      console.log('page: ', page);
-      // return {page};
-      // dispatch(postsSlice.actions.changePage(page));
+      dispatch(postsSlice.actions.changePage(page));
     }
     const token = getState().token.token;
     const after = getState().postsData.after;
@@ -101,6 +99,7 @@ export const postsDataRequestAsync = createAsyncThunk(
     const isLast = getState().postsData.isLast;
 
     if (!token || loading || isLast) return;
+    dispatch(postsSlice.actions.postsDataRequest());
 
     return token && axios(`${URL_API}/${page}?limit=10&${after ? `after=${after}` : ''}`, {
       headers: {
@@ -109,9 +108,7 @@ export const postsDataRequestAsync = createAsyncThunk(
     })
       .then(({data: loadedPosts}) => {
         const data = loadedPosts.data.children;
-        console.log('loadedPosts: ', loadedPosts);
         const after = loadedPosts.data.after;
-        console.log('after: ', after);
         const postsData = [];
 
         for (let i = 0; i < data.length; i++) {
@@ -125,14 +122,12 @@ export const postsDataRequestAsync = createAsyncThunk(
             thumbnail: data[i].data.thumbnail,
           };
         }
-        console.log('postsData: ', postsData);
-        if (after) return {postsData, after, page};
-        if (!after) return {postsData, page};
-        // if (after) {
-        //   dispatch(postsSlice.actions.postsDataRequestSuccessAfter({postsData, after}));
-        // } else {
-        //   dispatch(postsSlice.actions.postsDataRequestSuccess({postsData, after}));
-        // }
+
+        if (after) {
+          dispatch(postsSlice.actions.postsDataRequestSuccessAfter({postsData, after}));
+        } else {
+          dispatch(postsSlice.actions.postsDataRequestSuccess({postsData, after}));
+        }
       })
       .catch(error => ({error}));
   }

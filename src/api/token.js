@@ -3,7 +3,7 @@ export const setToken = (token) => {
 };
 
 export const getToken = () => {
-  const token = '';
+  let token = '';
   if (location.pathname.includes('/auth')) {
     const token = new URLSearchParams(location.hash.substring(1))
       .get('access_token');
@@ -12,7 +12,8 @@ export const getToken = () => {
   }
 
   if (localStorage.getItem('bearer')) {
-    setToken(localStorage.getItem('bearer'));
+    token = (localStorage.getItem('bearer'));
+    setToken(token);
   }
 
   return token;
