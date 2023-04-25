@@ -17,7 +17,3 @@ export const ImgComponent = (thumbnail) => {
     <img className={style.img} src={notphoto} alt='{title}' />
   );
 };
-
-// export const ImgComponent = (thumbnail) => (
-//   <img className={style.img} src={thumbnail.thumbnail} alt='{title}' />
-// );

@@ -17,7 +17,6 @@ export const Auth = () => {
   const logoutHandler = () => {
     dispatch(deleteToken());
     clearAuth({});
-    // location.href = 'http://localhost:3000/';
   };
 
   return (
