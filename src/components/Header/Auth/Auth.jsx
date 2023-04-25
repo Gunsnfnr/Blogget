@@ -7,6 +7,7 @@ import {deleteToken} from '../../../store/tokenReducer';
 import {useDispatch} from 'react-redux';
 import {useAuth} from '../../../hooks/useAuth.js';
 import Authloader from '../../../UI/Authloader';
+import {Link} from 'react-router-dom';
 
 export const Auth = () => {
   const [isVisible, setVisible] = useState(false);
@@ -36,7 +37,9 @@ export const Auth = () => {
             />
           </button>
           {(isVisible ?
-          <button className={style.logout} onClick={() => logoutHandler()}>Logout</button> :
+            <Link to='/'>
+              <button className={style.logout} onClick={() => logoutHandler()}>Logout</button>
+            </Link> :
           <button className={style.logoutInvisible}>Logout</button>
           )}
         </>

@@ -1,16 +1,16 @@
 import {useEffect, useRef} from 'react';
+import {postsDataRequestAsync} from '../../../store/posts/postsDataAction';
 import {useDispatch, useSelector} from 'react-redux';
 import {CircleLoader} from 'react-spinners';
 
 import style from './List.module.css';
 import Post from './Post';
 import {Outlet, useParams} from 'react-router-dom';
-import {postsDataRequestAsync} from '../../../store/posts/postsDataAction';
 
 export const List = () => {
   const loadedPosts = useSelector(state => state.postsData.posts);
   const token = useSelector(state => state.token.token);
-  const loading = useSelector(state => state.postsData.loading);
+  const loadingStatus = useSelector(state => state.postsData.status);
   const dispatch = useDispatch();
   const {page} = useParams();
   const endList = useRef(null);
@@ -43,7 +43,7 @@ export const List = () => {
         {loadedPosts.map((postsData) => (
           <Post key={postsData.id} postData={postsData} />
         ))}
-        { (token && loading) ?
+        { (token && loadingStatus === 'loading') ?
           <CircleLoader color='#94f285' css={{display: 'block'}} size={150} /> : ''
         }{ (!token) ?
           <div>You are not logged in</div> : ''
