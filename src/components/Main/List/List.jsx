@@ -42,7 +42,9 @@ export const List = () => {
           <Post key={postsData.id} postData={postsData} />
         ))}
         { (token && loading) ?
-          <CircleLoader color='#94f285' css={{display: 'block'}} size={150} /> : ''
+        <>
+          <CircleLoader
+            className={style.loader} color='#94f285' css={{display: 'block'}} size={150}/></> : ''
         }{ (!token) ?
           <div>You are not logged in</div> : ''
         }

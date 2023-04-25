@@ -23,6 +23,10 @@
     font-size: 18px;
     cursor: pointer;
   }
+  .loader {
+    position: absolute !important;
+    bottom: 50px;
+  }
     
   @media (max-width: 768px) {
     .btn {
